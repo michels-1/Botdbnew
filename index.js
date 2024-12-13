@@ -6,7 +6,7 @@ const {
   fetchLatestBaileysVersion,
   jidNormalizedUser,
   getContentType
-} = require('@adiwajshing/baileys')
+} = require('@whiskeysockets/baileys')
 const fs = require('fs')
 const P = require('pino')
 const config = require('./config')
@@ -114,38 +114,11 @@ const groupAdmins = isGroup ? await getGroupAdmins(participants) : ''
 const isBotAdmins = isGroup ? groupAdmins.includes(botNumber2) : false
 const isAdmins = isGroup ? groupAdmins.includes(sender) : false
 
-const isAnti = (teks) => {
-let getdata = teks
-for (let i=0;i<getdata.length;i++) {
-if(getdata[i] === from) return true
-}
-return false
-}
-
 const reply = async(teks) => {
   return await conn.sendMessage(from, { text: teks }, { quoted: mek })
 }
 conn.replyad = async (teks) => {
-  return await conn.sendMessage(from, { text: teks ,
-contextInfo: {
-    mentionedJid: [ '' ],
-    groupMentions: [],
-    forwardingScore: 1,
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: '120363182681793169@newsletter',
-      serverMessageId: 127
-    },
-externalAdReply: { 
-title: '𝗭𝗲𝗿𝗼-𝗧𝗪𝗢 𝗠𝗗 🍭',
-body: 'ᴀ ꜱɪᴍᴘʟᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ',
-mediaType: 1,
-sourceUrl: "https://zerotwomd.me/" ,
-thumbnailUrl: 'https://raw.githubusercontent.com/vihangayt0/ZeroTwo-Uploads/main/bbb61bc283cc1891a9a3c.jpg' ,
-renderLargerThumbnail: false,
-showAdAttribution: true
-}
-}}, { quoted: mek })
+  await conn.sendMessage(from, { text: teks }, { quoted: mek })
 }
 const NON_BUTTON = true // Implement a switch to on/off this feature...
 conn.buttonMessage2 = async (jid, msgData,quotemek) => {
@@ -164,48 +137,14 @@ CMD_ID_MAP.push({ cmdId: mainNumber, cmd: button.buttonId });
     if (msgData.headerType === 1) {
 const buttonMessage = `${msgData.text}\n\n🔢 Reply below number,${result}\n\n${msgData.footer}`
 const textmsg = await conn.sendMessage(from, { text: buttonMessage ,
-  contextInfo: {
-    mentionedJid: [ '' ],
-    groupMentions: [],
-    forwardingScore: 1,
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: '120363182681793169@newsletter',
-      serverMessageId: 127
-    },
-externalAdReply: { 
-title: '𝗭𝗲𝗿𝗼-𝗧𝗪𝗢 𝗠𝗗 🍭',
-body: 'ᴀ ꜱɪᴍᴘʟᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ',
-mediaType: 1,
-sourceUrl: "https://zerotwomd.me/" ,
-thumbnailUrl: 'https://raw.githubusercontent.com/vihangayt0/ZeroTwo-Uploads/main/bbb61bc283cc1891a9a3c.jpg' ,
-renderLargerThumbnail: false,
-showAdAttribution: true
-}
-}}, { quoted: quotemek || mek})
+}, { quoted: quotemek || mek})
 await updateCMDStore(textmsg.key.id, CMD_ID_MAP);
     } else if (msgData.headerType === 4) {
-const buttonMessage = `${msgData.caption}\n\n🔢 Reply below number,${result}\n\n${msgData.footer}`
+const buttonMessage = `${msgData.caption}\n\n*╭┉━┉┉┉┉┉━━┉━━━┉━⦁⦂⦁*
+*┃ ❍. 𝑅𝑒𝑝𝑙𝑦 𝐵𝑒𝑙𝑜𝑤 𝑁𝑢𝑚𝑏𝑒𝑟...*
+*╰┉━━━┉━━━┉━━━┉━┉⦁⦂⦁*,${result}\n\n${msgData.footer}`
 const imgmsg = await conn.sendMessage(jid, { image: msgData.image, caption: buttonMessage ,
-contextInfo: {
-    mentionedJid: [ '' ],
-    groupMentions: [],
-    forwardingScore: 1,
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: '120363182681793169@newsletter',
-      serverMessageId: 127
-    },
-externalAdReply: { 
-title: '𝗭𝗲𝗿𝗼-𝗧𝗪𝗢 𝗠𝗗 🍭',
-body: 'ᴀ ꜱɪᴍᴘʟᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ',
-mediaType: 1,
-sourceUrl: "https://zerotwomd.me/" ,
-thumbnailUrl: 'https://raw.githubusercontent.com/vihangayt0/ZeroTwo-Uploads/main/bbb61bc283cc1891a9a3c.jpg' ,
-renderLargerThumbnail: false,
-showAdAttribution: true
-}
-}}, { quoted: quotemek || mek})
+}, { quoted: quotemek || mek})
 await updateCMDStore(imgmsg.key.id, CMD_ID_MAP);
     }
   }
@@ -225,48 +164,16 @@ CMD_ID_MAP.push({ cmdId: mainNumber, cmd: button.buttonId });
     });
 
     if (msgData.headerType === 1) {
-const buttonMessage = `${msgData.text || msgData.caption}\n\n🔢 Reply below number,${result}\n\n└───────────◉\n\n${msgData.footer}`
-const textmsg = await conn.sendMessage(from, { text: buttonMessage ,contextInfo: {
-    mentionedJid: [ '' ],
-    groupMentions: [],
-    forwardingScore: 1,
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: '120363182681793169@newsletter',
-      serverMessageId: 127
-    },
-externalAdReply: { 
-title: '𝗭𝗲𝗿𝗼-𝗧𝗪𝗢 𝗠𝗗 🍭',
-body: 'ᴀ ꜱɪᴍᴘʟᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ',
-mediaType: 1,
-sourceUrl: "https://zerotwomd.me/" ,
-thumbnailUrl: 'https://raw.githubusercontent.com/vihangayt0/ZeroTwo-Uploads/main/bbb61bc283cc1891a9a3c.jpg' ,
-renderLargerThumbnail: false,
-showAdAttribution: true
-}
-}}, { quoted: quotemek || mek})
+const buttonMessage = `${msgData.text || msgData.caption}\n\n*╭┉━┉┉┉┉┉━━┉━━━┉━⦁⦂⦁*
+*┃ ❍. 𝑅𝑒𝑝𝑙𝑦 𝐵𝑒𝑙𝑜𝑤 𝑁𝑢𝑚𝑏𝑒𝑟...*
+*╰┉━━━┉━━━┉━━━┉━┉⦁⦂⦁*,${result}\n\n└───────────◉\n\n${msgData.footer}`
+const textmsg = await conn.sendMessage(from, { text: buttonMessage ,}, { quoted: quotemek || mek})
 await updateCMDStore(textmsg.key.id, CMD_ID_MAP);
     } else if (msgData.headerType === 4) {
-const buttonMessage = `${msgData.caption}\n\n🔢 Reply below number,${result}\n\n└───────────◉\n\n${msgData.footer}`
-const imgmsg = await conn.sendMessage(jid, { image: msgData.image, caption: buttonMessage ,contextInfo: {
-    mentionedJid: [ '' ],
-    groupMentions: [],
-    forwardingScore: 1,
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: '120363182681793169@newsletter',
-      serverMessageId: 127
-    },
-externalAdReply: { 
-title: '𝗭𝗲𝗿𝗼-𝗧𝗪𝗢 𝗠𝗗 🍭',
-body: 'ᴀ ꜱɪᴍᴘʟᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ',
-mediaType: 1,
-sourceUrl: "https://zerotwomd.me/" ,
-thumbnailUrl: 'https://raw.githubusercontent.com/vihangayt0/ZeroTwo-Uploads/main/bbb61bc283cc1891a9a3c.jpg' ,
-renderLargerThumbnail: false,
-showAdAttribution: true
-}
-}}, { quoted: quotemek || mek})
+const buttonMessage = `${msgData.caption}\n\n*╭┉━┉┉┉┉┉━━┉━━━┉━⦁⦂⦁*
+*┃ ❍. 𝑅𝑒𝑝𝑙𝑦 𝐵𝑒𝑙𝑜𝑤 𝑁𝑢𝑚𝑏𝑒𝑟...*
+*╰┉━━━┉━━━┉━━━┉━┉⦁⦂⦁*,${result}\n\n└───────────◉\n\n${msgData.footer}`
+const imgmsg = await conn.sendMessage(jid, { image: msgData.image, caption: buttonMessage ,}, { quoted: quotemek || mek})
 await updateCMDStore(imgmsg.key.id, CMD_ID_MAP);
     }
   }
@@ -297,25 +204,7 @@ section.rows.forEach((row, rowIndex) => {
 
     const listMessage = `${msgData.text}\n\n${msgData.buttonText},${result}\n${msgData.footer}`
     const text = await conn.sendMessage(from, { text: listMessage ,
-contextInfo: {
-    mentionedJid: [ '' ],
-    groupMentions: [],
-    forwardingScore: 1,
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: '120363182681793169@newsletter',
-      serverMessageId: 127
-    },
-externalAdReply: { 
-title: '𝗭𝗲𝗿𝗼-𝗧𝗪𝗢 𝗠𝗗 🍭',
-body: 'ᴀ ꜱɪᴍᴘʟᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ',
-mediaType: 1,
-sourceUrl: "https://zerotwomd.me/" ,
-thumbnailUrl: 'https://raw.githubusercontent.com/vihangayt0/ZeroTwo-Uploads/main/bbb61bc283cc1891a9a3c.jpg' ,
-renderLargerThumbnail: false,
-showAdAttribution: true
-}
-}}, { quoted: quotemek || mek})
+}, { quoted: quotemek || mek})
     await updateCMDStore(text.key.id, CMD_ID_MAP);
   }
 }
@@ -344,25 +233,7 @@ section.rows.forEach((row, rowIndex) => {
 
     const listMessage = `${msgData.text}\n\n${msgData.buttonText},${result}\n\n└───────────◉\n\n${msgData.footer}`
     const text = await conn.sendMessage(from, { text: listMessage, 
-contextInfo: {
-    mentionedJid: [ '' ],
-    groupMentions: [],
-    forwardingScore: 1,
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: '120363182681793169@newsletter',
-      serverMessageId: 127
-    },
-externalAdReply: { 
-title: '𝗭𝗲𝗿𝗼-𝗧𝗪𝗢 𝗠𝗗 🍭',
-body: 'ᴀ ꜱɪᴍᴘʟᴇ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ',
-mediaType: 1,
-sourceUrl: "https://zerotwomd.me/" ,
-thumbnailUrl: 'https://raw.githubusercontent.com/vihangayt0/ZeroTwo-Uploads/main/bbb61bc283cc1891a9a3c.jpg' ,
-renderLargerThumbnail: false,
-showAdAttribution: true
-}
-}}, { quoted: quotemek || mek})
+}, { quoted: quotemek || mek})
     await updateCMDStore(text.key.id, CMD_ID_MAP);
   }
 }
@@ -377,7 +248,8 @@ editedMessage: {
 }
     }
   }, {})
-}
+  }
+
 conn.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
   let mime = '';
   let res = await axios.head(url)
